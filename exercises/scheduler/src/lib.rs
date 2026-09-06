@@ -70,9 +70,13 @@ impl Scheduler {
         if super::is_retry_eligible(job.attempts, job.max_attempts, false) {
             let delay = super::retry_delay_ms(job.attempts.saturating_sub(1));
             let name = job.name;
+            let attempts = job.attempts;
+            let max_attempts = job.max_attempts;
             job.ready_at = now_ms.saturating_add(delay);
             self.queued.push_back(job);
-            Some(format!("retry {name} in {delay}ms"))
+            Some(format!(
+                "retry {name} in {delay}ms (attempt {attempts}/{max_attempts})"
+            ))
         } else {
             Some(format!("failed {}", job.name))
         }
@@ -92,13 +96,37 @@ pub fn demo() -> Vec<String> {
         println!("index: refreshed");
         Ok(())
     }
+    fn always_fails(_: u8) -> Result<(), ()> {
+        Err(())
+    }
+    fn record(events: &mut Vec<String>, name: &str, outcome: Result<(), &'static str>) {
+        match outcome {
+            Ok(()) => events.push(format!("admitted {name}")),
+            Err(reason) => events.push(format!("rejected {name}: {reason}")),
+        }
+    }
+
     let mut scheduler = Scheduler::new(3, 3).unwrap();
-    scheduler.submit("report", report).unwrap();
-    scheduler.submit("index", index).unwrap();
-    scheduler.submit("cancelled-report", report).unwrap();
-    assert!(scheduler.cancel("cancelled-report"));
-    let mut events = vec!["cancelled cancelled-report".into()];
-    for now in [0, 0, 99, 100, 299, 300] {
+    let mut events = Vec::new();
+    record(&mut events, "report", scheduler.submit("report", report));
+    record(&mut events, "index", scheduler.submit("index", index));
+    record(
+        &mut events,
+        "cancelled-report",
+        scheduler.submit("cancelled-report", report),
+    );
+    // The queue is already at capacity, so this submission is refused.
+    record(&mut events, "archive", scheduler.submit("archive", index));
+    if scheduler.cancel("cancelled-report") {
+        events.push("cancelled cancelled-report".into());
+    }
+    // The freed slot admits a job that will exhaust its retry budget.
+    record(
+        &mut events,
+        "always-fails",
+        scheduler.submit("always-fails", always_fails),
+    );
+    for now in [0, 0, 0, 99, 100, 100, 299, 300, 300] {
         if let Some(event) = scheduler.process_next(now) {
             events.push(format!("{now}ms: {event}"));
         }
@@ -123,7 +151,7 @@ mod tests {
         scheduler.submit("beta", succeeds).unwrap();
         assert_eq!(
             scheduler.process_next(0).as_deref(),
-            Some("retry alpha in 100ms")
+            Some("retry alpha in 100ms (attempt 1/2)")
         );
         assert_eq!(scheduler.process_next(0).as_deref(), Some("completed beta"));
         assert_eq!(scheduler.process_next(99), None);
@@ -185,7 +213,9 @@ mod tests {
                 let delay = 100u64 << (attempt - 1);
                 assert_eq!(
                     scheduler.process_next(now),
-                    Some(format!("retry alpha in {delay}ms"))
+                    Some(format!(
+                        "retry alpha in {delay}ms (attempt {attempt}/{max_attempts})"
+                    ))
                 );
                 assert_eq!(scheduler.process_next(now + delay - 1), None);
                 now += delay;
