@@ -61,7 +61,7 @@ cargo ply verify .
 cargo run
 ```
 
-Follow the demo's ready times. The queue must also allow other ready work to proceed while a retry is delayed; the shared scheduler tests cover that behavior.
+Follow the demo's ready times (the trace is the same one shown in [lesson 1](01-first-claim.md)). The queue must also allow other ready work to proceed while a retry is delayed; the shared scheduler tests cover that behavior.
 
 <details>
 <summary>Hint</summary>
