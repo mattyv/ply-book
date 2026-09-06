@@ -15,12 +15,14 @@ The queue removes a cancelled pending job. The decision's cancellation argument 
 ## Deliverables
 
 1. Write a small truth table covering cancellation and the attempt boundary.
-2. Express the complete requirement as a postcondition and request a generated-input check in `ply.yaml`. The starter deliberately leaves this annotation for you to write.
+2. Express the complete requirement as a postcondition in `src/lib.rs`, and request a generated-input check for it in `ply.yaml`. The starter deliberately leaves both for you to write: the function has no `#[ply::ensures]` yet, and `ply.yaml` requests `checks: []` for it, an empty list rather than `fuzz(64)`.
 3. Demonstrate that your chosen check rejects the starter defect. Preserve the finding or counterexample.
 4. Repair the implementation and run ordinary tests, Ply verification, and the demo.
 5. Write a short review: what was checked, what passed, and which application-level properties remain outside that evidence.
 
 Choose your own examples before reading a hint. Include at least one cancelled job with budget remaining and one uncancelled job with no budget remaining.
+
+If you run `cargo ply verify .` before both pieces are in place, expect a diagnostic rather than a broken-promise report. With the postcondition written but the check request still empty, verify reports `unclaimed`: nothing was asked for evidence, so none was gathered. With a check requested but no postcondition written yet, it reports `V0505`, an *unsupported* verdict: there is nothing to check the result against. Neither is the finding this challenge asks for; only once both pieces are written does a wrong implementation surface as a genuine broken-promise report.
 
 <details>
 <summary>Hint: separate the decisions</summary>

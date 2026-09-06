@@ -15,7 +15,7 @@ rustup toolchain install 1.98.0 --profile minimal
 The repository's `rust-toolchain.toml` selects Rust 1.98.0. Install the course's exact Ply command:
 
 ```sh
-cargo install --git https://github.com/mattyv/ply   --rev c6b9e29892f27bb8398f5d99ad2cb0f588b3e4b5   --locked ply-cli
+cargo install --git https://github.com/mattyv/ply   --rev 0ae6f7d37b6a385e7b1283a0d43e0d1c2cb586d9   --locked ply-cli
 cargo ply --help
 ```
 
@@ -32,9 +32,9 @@ cargo ply check .
 cargo ply verify .
 ```
 
-The starter is deliberately incomplete: its behavioral test and verification should fail. The failure is the starting point of lesson 1, not an installation check that must be green. A compiler error, missing command, or download failure is a setup problem; a reported broken postcondition is the intended finding.
+The starter is deliberately incomplete. `cargo test` fails outright: all five tests fail, not only the lesson's own admission test. Four of the five live in `scheduler::tests`, the shared queue's own tests, and they fail too, because `can_claim` always returns `false`, so nothing is ever admitted and nothing downstream has anything to work with. That is not a broken scheduler; it is one unrepaired decision failing every test that depends on it. The failure is the starting point of lesson 1, not an installation check that must be green. A compiler error, missing command, or download failure is a setup problem; a reported broken postcondition is the intended finding.
 
-Each lesson has `starter` and `solution` packages. Work in the starter. Later chapters begin with earlier decisions already repaired, so you can resume without copying files between chapters. The shared scheduler source lives in `exercises/scheduler/src/`.
+Each lesson has `starter` and `solution` packages. Work in the starter. Later chapters begin with earlier decisions already repaired, so you can resume without copying files between chapters. A starter also contains working bodies for functions that belong to later lessons, so the shared scheduler still runs end to end; those functions carry no `requires` or `ensures` yet, so you will not see a later lesson's promise before you reach it. The shared scheduler source lives in `exercises/scheduler/src/`.
 
 ## Learn the three commands
 
@@ -46,9 +46,13 @@ Each lesson has `starter` and `solution` packages. Work in the starter. Later ch
 
 Ply's contract attributes do not add runtime assertions to an ordinary Rust build. A passing `cargo test` therefore does not, by itself, say that those contracts were checked. After a verification failure, Ply can also generate an ordinary regression test from the counterexample; that test does run under Cargo.
 
+`cargo ply --help` and `cargo ply explain` cite section marks such as `§6`, `§8`, and `The-Ply-Spec.md §5.4c`. Those refer to sections of Ply's own specification, not this book. See [`The-Ply-Spec.md`](https://github.com/mattyv/ply/blob/0ae6f7d37b6a385e7b1283a0d43e0d1c2cb586d9/The-Ply-Spec.md) at the pinned revision if you want that reasoning in full.
+
 ## Keep the failure evidence
 
-Verification can create `src/ply_generated_cex.rs` and connect it to the crate's tests. Read that file when it appears. It records a concrete failure that you can reproduce while repairing the code. Do not delete it merely to make `cargo test` pass.
+Verification can create `src/ply_generated_cex.rs` and connect it to the crate's tests. Connecting it means an appended line, `mod ply_generated_cex;`, at the end of `src/lib.rs`; expect to see that line and the new file together in `git status`. The first `verify` in a fresh checkout can also update `Cargo.lock` to add the generated harness's own dependencies. Neither change alters the code you wrote.
+
+Read `src/ply_generated_cex.rs` when it appears. It records a concrete failure that you can reproduce while repairing the code. Do not delete it merely to make `cargo test` pass.
 
 Generated checking harnesses under `target/ply/` are scratch files. Fix your source rather than editing a harness.
 

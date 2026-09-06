@@ -84,7 +84,7 @@ You can also inspect the declared structure without running checks:
 cargo ply render . --text
 ```
 
-Read the component, function, promise, and requested check in the output. This view describes the declaration; it is not another verification run.
+Read the component, function, and requested check in the output. It does not print the promise itself; for the `ensures` expression, read `src/lib.rs`. This view describes the declaration; it is not another verification run.
 
 ## Explain the evidence
 
