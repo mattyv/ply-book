@@ -51,7 +51,9 @@ cargo ply verify .
 cargo run
 ```
 
-Follow the failure count in the demo and read the bounded-retry test in the shared scheduler. The contract checks the local arithmetic; that test checks that the application uses it to stop retrying.
+Follow the failure count in the demo and read the bounded-retry test in the shared scheduler, `failures_exhaust_each_supported_budget_with_increasing_delays`. Before your repair, that test fails, and so does `delayed_retries_do_not_block_ready_jobs`: its own job looks at the attempt number to decide when to stop failing, so a stuck counter breaks it too. The contract checks the local arithmetic; those tests check that the application uses it to stop retrying.
+
+Expect one more thing from the passing `cargo ply verify .`: a `W0503` warning. The precondition `attempts <= max_attempts` discards every generated draw outside it, and this run reports that directly — most of the drawn inputs are rejected before proptest collects 64 that satisfy the precondition. The count of 64 is still honest: proptest kept drawing until it had that many accepted cases. But every one of those cases comes from the narrow region the precondition allows, which is weaker evidence than "64 cases" suggests by itself. The run still passes; the warning is not a failure.
 
 <details>
 <summary>Hint</summary>
