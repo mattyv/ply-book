@@ -44,7 +44,7 @@ cargo ply verify .
 
 This run should find a broken promise. You have improved the specification before repairing the code. If it still passes, inspect whether your new promise distinguishes 100 from the required delay at index one.
 
-Alongside the P0502 report, this run also prints:
+Alongside the broken-promise report, this run also prints:
 
 ```text
 Checked again rather than carried forward from an earlier run, because what each one depended on has changed:
