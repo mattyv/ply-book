@@ -69,7 +69,27 @@ cargo ply verify .
 cargo run
 ```
 
-The last command runs the scheduler demo with your decision. Follow which jobs enter the queue. The tests also exercise the shared scheduler; a correct answer from this one function is only part of a working queue.
+The last command runs the scheduler demo with your decision. Follow which jobs enter the queue. Once `can_claim` is repaired, it prints:
+
+```text
+index: refreshed
+report: processed 35 records
+admitted report
+admitted index
+admitted cancelled-report
+rejected archive: queue is full
+cancelled cancelled-report
+admitted always-fails
+0ms: retry report in 100ms (attempt 1/3)
+0ms: completed index
+0ms: retry always-fails in 100ms (attempt 1/3)
+100ms: retry report in 200ms (attempt 2/3)
+100ms: retry always-fails in 200ms (attempt 2/3)
+300ms: completed report
+300ms: failed always-fails
+```
+
+The first two lines are printed by `index` and `report` themselves as they run, before the event list; read the rest in order. Three submissions are admitted before the queue fills; `archive` is rejected because the queue is already at capacity; `cancelled-report` is then cancelled before it runs. The freed slot admits `always-fails`, which retries twice on the same schedule as `report` and is still failing when its budget of three attempts runs out. The tests also exercise the shared scheduler; a correct answer from this one function is only part of a working queue.
 
 <details>
 <summary>Hint</summary>
