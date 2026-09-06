@@ -19,6 +19,16 @@ cargo install --git https://github.com/mattyv/ply   --rev 0ae6f7d37b6a385e7b1283
 cargo ply --help
 ```
 
+Running that command from inside the cloned repository prints this warning:
+
+```text
+warning: default toolchain implicitly overridden with `1.98.0-x86_64-unknown-linux-gnu` by rustup toolchain file
+  = help: use `cargo +stable install` if you meant to use the stable toolchain
+  = note: rustup selects the toolchain based on the parent environment and not the environment of the package being installed
+```
+
+This is expected: `rust-toolchain.toml` is in effect, so Ply is built with the course's pinned toolchain rather than your default one. It is not a problem.
+
 If Cargo reports another `ply-cli` installation, decide whether to replace it, then repeat the installation with `--force`. The exercise manifests already pin the matching attribute dependency. Keep both pins together when upgrading the course.
 
 You need an internet connection for the initial downloads. These lessons use `fuzz` checks and ordinary tests; they do not require Kani or a mutation-testing installation.
