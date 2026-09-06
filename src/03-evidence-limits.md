@@ -44,6 +44,15 @@ cargo ply verify .
 
 This run should find a broken promise. You have improved the specification before repairing the code. If it still passes, inspect whether your new promise distinguishes 100 from the required delay at index one.
 
+Alongside the P0502 report, this run also prints:
+
+```text
+Checked again rather than carried forward from an earlier run, because what each one depended on has changed:
+  scheduler::retry_delay_ms — the function's own source, its contract and the checks that ran changed since that result was recorded
+```
+
+Ply records each function's verified result and reuses it on a later run when nothing that result depends on has changed. Here you changed the contract, so Ply re-checked rather than reusing the earlier passing result, and says so. This record lives in `ply.lock`, next to `Cargo.lock`, along with scratch files Ply generates under `target/ply/`. `.gitignore` already excludes both; there is nothing to check into git.
+
 Then repair the implementation and run:
 
 ```sh
