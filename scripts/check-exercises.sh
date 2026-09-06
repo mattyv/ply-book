@@ -39,15 +39,21 @@ for stage in 01-first-claim 02-first-failure 03-evidence-limits 04-retry-eligibi
   dir=$(copy "$stage")
   expect_test_fail run "$dir/starter" cargo test
   if [ "$stage" = 04-retry-eligibility ]; then
-    # The independent challenge asks learners to author this instructor contract.
-    python3 - "$dir/starter/src/lib.rs" <<'CONTRACT'
+    # The independent challenge asks learners to author this instructor contract
+    # and to request a check for it in ply.yaml; the starter deliberately leaves
+    # both undone (an empty checks: list, and no #[ply::ensures]).
+    python3 - "$dir/starter/src/lib.rs" "$dir/starter/ply.yaml" <<'CONTRACT'
 from pathlib import Path
 import sys
-path = Path(sys.argv[1])
-source = path.read_text()
+lib_path, yaml_path = Path(sys.argv[1]), Path(sys.argv[2])
+source = lib_path.read_text()
 marker = "// TODO: write the complete retry eligibility postcondition."
 assert source.count(marker) == 1
-path.write_text(source.replace(marker, "#[ply::ensures(|result| *result == (!cancelled && attempts < max_attempts))]"))
+lib_path.write_text(source.replace(marker, "#[ply::ensures(|result| *result == (!cancelled && attempts < max_attempts))]"))
+declaration = yaml_path.read_text()
+empty_checks = "is_retry_eligible:\n        checks: []"
+assert declaration.count(empty_checks) == 1
+yaml_path.write_text(declaration.replace(empty_checks, "is_retry_eligible:\n        checks: [fuzz(64)]"))
 CONTRACT
   fi
   run "$dir/starter" "$ply_bin" check .
@@ -63,6 +69,10 @@ CONTRACT
     esac
     verify_json "$dir/starter" "$target" violation no
   fi
+  # A generated regression test must actually compile and run, not just get
+  # written to disk -- this is the step that would have caught the lesson 2
+  # generated test failing to compile.
+  expect_test_fail run "$dir/starter" cargo test
   run "$dir/solution" cargo test
   run "$dir/solution" cargo run --quiet
   run "$dir/solution" "$ply_bin" check .
