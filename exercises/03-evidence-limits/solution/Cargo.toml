@@ -1,0 +1,13 @@
+[package]
+name = "evidence-limits-solution"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+ply = { package = "ply-attrs", git = "https://github.com/mattyv/ply", rev = "c6b9e29892f27bb8398f5d99ad2cb0f588b3e4b5" }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ["cfg(kani)"] }

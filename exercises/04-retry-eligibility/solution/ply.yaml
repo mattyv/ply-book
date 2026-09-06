@@ -1,0 +1,7 @@
+ply: 1
+components:
+  scheduler:
+    anchor: retry_eligibility_solution
+    fns:
+      is_retry_eligible:
+        checks: [fuzz(64)]

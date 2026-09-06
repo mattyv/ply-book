@@ -1,0 +1,7 @@
+ply: 1
+components:
+  scheduler:
+    anchor: evidence_limits_starter
+    fns:
+      retry_delay_ms:
+        checks: [fuzz(64)]

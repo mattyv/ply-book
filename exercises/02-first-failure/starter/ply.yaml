@@ -1,0 +1,7 @@
+ply: 1
+components:
+  scheduler:
+    anchor: first_failure_starter
+    fns:
+      apply_failure:
+        checks: [fuzz(64)]

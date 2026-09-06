@@ -1,0 +1,59 @@
+name: Book
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.98.0
+
+      - name: Install mdBook
+        run: cargo install mdbook --version 0.5.4 --locked
+
+      - name: Install Ply
+        run: cargo install --git https://github.com/mattyv/ply ply-cli --rev c6b9e29892f27bb8398f5d99ad2cb0f588b3e4b5 --locked
+
+      - name: Check exercises
+        run: scripts/check-exercises.sh
+
+      - name: Build book
+        run: mdbook build
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: book
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

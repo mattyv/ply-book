@@ -1,0 +1,7 @@
+ply: 1
+components:
+  scheduler:
+    anchor: first_claim_solution
+    fns:
+      can_claim:
+        checks: [fuzz(64)]

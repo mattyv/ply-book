@@ -1,0 +1,64 @@
+# Set up your workshop
+
+The website is your textbook. Run Rust and Ply on your own machine; GitHub Pages serves the book and does not execute the exercises.
+
+## Get the project
+
+Install [Rust through rustup](https://www.rust-lang.org/tools/install), then clone the course:
+
+```sh
+git clone https://github.com/mattyv/ply-book.git
+cd ply-book
+rustup toolchain install 1.98.0 --profile minimal
+```
+
+The repository's `rust-toolchain.toml` selects Rust 1.98.0. Install the course's exact Ply command:
+
+```sh
+cargo install --git https://github.com/mattyv/ply   --rev c6b9e29892f27bb8398f5d99ad2cb0f588b3e4b5   --locked ply-cli
+cargo ply --help
+```
+
+If Cargo reports another `ply-cli` installation, decide whether to replace it, then repeat the installation with `--force`. The exercise manifests already pin the matching attribute dependency. Keep both pins together when upgrading the course.
+
+You need an internet connection for the initial downloads. These lessons use `fuzz` checks and ordinary tests; they do not require Kani or a mutation-testing installation.
+
+## Find your first exercise
+
+```sh
+cd exercises/01-first-claim/starter
+cargo test
+cargo ply check .
+cargo ply verify .
+```
+
+The starter is deliberately incomplete: its behavioral test and verification should fail. The failure is the starting point of lesson 1, not an installation check that must be green. A compiler error, missing command, or download failure is a setup problem; a reported broken postcondition is the intended finding.
+
+Each lesson has `starter` and `solution` packages. Work in the starter. Later chapters begin with earlier decisions already repaired, so you can resume without copying files between chapters. The shared scheduler source lives in `exercises/scheduler/src/`.
+
+## Learn the three commands
+
+| Command | What it establishes |
+| --- | --- |
+| `cargo test` | The ordinary Rust tests that ran passed or failed |
+| `cargo ply check .` | The declaration is valid and the available structural checks ran; it does not run the contract checks |
+| `cargo ply verify .` | The requested checks ran, or Ply reports why evidence could not be earned |
+
+Ply's contract attributes do not add runtime assertions to an ordinary Rust build. A passing `cargo test` therefore does not, by itself, say that those contracts were checked. After a verification failure, Ply can also generate an ordinary regression test from the counterexample; that test does run under Cargo.
+
+## Keep the failure evidence
+
+Verification can create `src/ply_generated_cex.rs` and connect it to the crate's tests. Read that file when it appears. It records a concrete failure that you can reproduce while repairing the code. Do not delete it merely to make `cargo test` pass.
+
+Generated checking harnesses under `target/ply/` are scratch files. Fix your source rather than editing a harness.
+
+## Preview the book locally (optional)
+
+From the repository root:
+
+```sh
+cargo install mdbook --version 0.5.4 --locked
+mdbook serve --open
+```
+
+You do not need mdBook to do the exercises.
