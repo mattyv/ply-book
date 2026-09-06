@@ -1,6 +1,6 @@
 # Read the evidence
 
-A useful visual review ends with a decision: which claim needs attention, what evidence supports it, and where to look next. Practice that review on the retry delay from [lesson 4](05-missed-input.md).
+A useful visual review ends with a decision: which claim needs attention, what [evidence](glossary.md#earned-evidence) supports it, and where to look next. Practice that review on the retry delay from [lesson 4](05-missed-input.md).
 
 Use the same `exercises/05-missed-input/starter` you are repairing. Capture the failure before changing its body. If you already completed the repair, use the reference drawings below for the before state; you do not need to undo your work.
 
@@ -19,9 +19,9 @@ Open `intent.svg` in a browser. Open the file directly to hover its shapes; a pi
 
 Read from the outside inward:
 
-1. The frame contains the declared system. Its summary counts declarations, not successful checks.
-2. The `scheduler` box is a component. It is not a claim that every function in the Rust scheduler has been checked.
-3. The `retry_delay_ms` chip names the function listed in this exercise's YAML. Its check label requests 64 generated cases.
+1. The frame contains the declared system. Its summary counts [declarations](glossary.md#declaration), not successful checks.
+2. The `scheduler` box is a [component](glossary.md#component). It is not a claim that every function in the Rust scheduler has been checked.
+3. The `retry_delay_ms` chip names the function listed in this exercise's YAML. Its [check](glossary.md#check) label requests 64 generated cases.
 
 The strip says “0 promise nothing” because the one function listed in this YAML requests a check. It does not count every Rust function in the project. An omitted function is outside this drawing, not implicitly verified.
 
@@ -36,16 +36,16 @@ Use the labels and tooltips alongside the shapes. Colour is a cue to investigate
 | Mark | Meaning and question to ask |
 | --- | --- |
 | Component box; function chip | Where does this declaration belong? Nested boxes express component nesting. |
-| Grey depth in a declaration render | How strong are the requested checks? This is a declared ceiling, not evidence already earned. |
+| Grey depth in a declaration render | How strong are the requested checks? This is a declared [ceiling](glossary.md#ceiling), not evidence already earned. |
 | Hatching; hollow or dashed component border | What has no claims? Absence of a claim is different from a failed claim. |
 | Contract mark; check label | What obligation is stated, and which checks were requested? Source annotations may only become available after verification. |
-| Green with earned evidence | Which check succeeded, for which claim and inputs? Fuzzing remains finite. |
-| Red with a violation | Which promise failed? Read the diagnostic before proposing a repair. In a structural drawing, a red barred connection can instead express a forbidden dependency. |
+| Green with [earned evidence](glossary.md#earned-evidence) | Which check succeeded, for which claim and inputs? Fuzzing remains finite. |
+| Red with a [violation](glossary.md#violation) | Which promise failed? Read the diagnostic before proposing a repair. In a structural drawing, a red barred connection can instead express a [forbidden dependency](glossary.md#deny-rule). |
 | Unknown, unsupported, or missing-evidence status | Why could the requested evidence not be earned? This is not a counterexample. |
 
 A component's summary does not replace its children's details. In a declaration drawing, the weakest declared function sets the component's ceiling. Inspect the individual claim before treating a dark or green box as reassuring.
 
-Our lesson has one component and one declared function, so there are no dependency arrows to interpret. In larger specifications, solid arrows declare allowed calls, dashed arrows declare data flows, and external boxes mark outside actors. A declared connection is not a runtime trace. Do not infer that a relationship was checked merely because it was drawn.
+Our lesson has one component and one declared function, so there are no dependency arrows to interpret. In larger specifications, [solid arrows](glossary.md#edge) declare allowed calls, dashed arrows declare data flows, and external boxes mark outside actors. A declared connection is not a runtime trace. Do not infer that a relationship was checked merely because it was drawn.
 
 ## Capture the failure
 
@@ -79,7 +79,7 @@ Work through this inspection:
 
 If the extension says **No Ply specs found**, check which folder you opened. If it says **No completed visual runs**, run verification with `--publish-view` from this starter and inspect any reported error. Opening the viewer alone does not establish evidence.
 
-A completed view is a snapshot. Editing the source does not repair that snapshot or make its old passing evidence apply to your new code. Publish another run after a change and inspect its run information. Use version control to compare code changes; these views show evidence rather than a code diff.
+A completed view is a [snapshot](glossary.md#snapshot). Editing the source does not repair that snapshot or make its old passing evidence apply to your new code. Publish another run after a change and inspect its run information. Use version control to compare code changes; these views show evidence rather than a code diff.
 
 ## Compare the repair
 

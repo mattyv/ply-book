@@ -56,7 +56,7 @@ Each lesson has `starter` and `solution` packages. Work in the starter. Later ch
 | `cargo ply render . -o intent.svg` | Draws the YAML declaration without gathering evidence |
 | `cargo ply verify . --publish-view --svg run.svg` | Runs checks, saves an evidence drawing, and publishes a local snapshot for Ply Visual |
 
-Ply's contract attributes do not add runtime assertions to an ordinary Rust build. A passing `cargo test` therefore does not, by itself, say that those contracts were checked. After a verification failure, Ply can also generate an ordinary regression test from the counterexample; that test does run under Cargo.
+Ply's [contract](glossary.md#contract) attributes do not add runtime assertions to an ordinary Rust build. A passing `cargo test` therefore does not, by itself, say that those contracts were checked. After a verification failure, Ply can also generate an ordinary [regression test](glossary.md#regression-test) from the counterexample; that test does run under Cargo.
 
 `cargo ply --help` and `cargo ply explain` cite section marks such as `§6`, `§8`, and `The-Ply-Spec.md §5.4c`. Those refer to sections of Ply's own specification, not this book. See [`The-Ply-Spec.md`](https://github.com/mattyv/ply/blob/0ae6f7d37b6a385e7b1283a0d43e0d1c2cb586d9/The-Ply-Spec.md) at the pinned revision if you want that reasoning in full.
 
@@ -66,7 +66,7 @@ Verification can create `src/ply_generated_cex.rs` and connect it to the crate's
 
 Read `src/ply_generated_cex.rs` when it appears. It records a concrete failure that you can reproduce while repairing the code. Do not delete it merely to make `cargo test` pass.
 
-Generated checking harnesses under `target/ply/` are scratch files. Fix your source rather than editing a harness.
+Generated checking [harnesses](glossary.md#harness) under `target/ply/` are scratch files. Fix your source rather than editing a harness.
 
 ## Preview the book locally (optional)
 

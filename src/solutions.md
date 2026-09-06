@@ -16,11 +16,11 @@ cargo ply verify .
 cargo run
 ```
 
-A passing contract check supports this predicate. The shared tests provide separate evidence for the queue's handling of it.
+A passing [contract](glossary.md#contract) check supports this predicate. The shared tests provide separate evidence for the queue's handling of it.
 
 ## 2. Failure accounting
 
-Increase the count safely, then cap it at the maximum. Saturating arithmetic prevents a wraparound before the cap is applied. The exact postcondition requires progress below the cap and stability at it.
+Increase the count safely, then cap it at the maximum. Saturating arithmetic prevents a wraparound before the cap is applied. The exact [postcondition](glossary.md#postcondition) requires progress below the cap and stability at it.
 
 The starter's unchanged count can satisfy a loose upper bound. That is why the repair preserves the exact transition rather than replacing it with “no more than the maximum.”
 
@@ -59,4 +59,4 @@ For the persistence change request, a sound answer distinguishes these checks fr
 
 ## What to keep
 
-Keep the repaired implementation, its promises, the requested checks, and useful regression tests. Keep your evidence note too: a later change to the attempt limit or queue model should make its assumptions easy to find.
+Keep the repaired implementation, its promises, the requested checks, and useful [regression tests](glossary.md#regression-test). Keep your evidence note too: a later change to the attempt limit or queue model should make its assumptions easy to find.

@@ -32,4 +32,4 @@ The shared queue calls the decisions you edit. They are small enough for Ply to 
 
 The scheduler has one owner and runs in one process. It does not save jobs across restarts, run workers concurrently, or promise that an external side effect happens exactly once. A crash after sending an export but before recording completion would need a design beyond this project.
 
-Keep that boundary in your final assessment. Passing checks for this scheduler cannot establish those properties.
+Keep that [boundary](glossary.md#boundary) in your final assessment. Passing checks for this scheduler cannot establish those properties.

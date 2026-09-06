@@ -2,7 +2,7 @@
 
 A job scheduler accepts work, chooses what runs next, and decides what to do when a job fails. A small mistake can lose work, fill a queue beyond its limit, or retry a failing job forever.
 
-In this course, you will build and repair those decisions in ordinary Rust. You will use Ply to state what they must do, find inputs that break those promises, and examine what a passing check actually establishes.
+In this course, you will build and repair those decisions in ordinary Rust. You will use Ply to state what they must do, find inputs that break those [promises](glossary.md#contract), and examine what a passing check actually establishes.
 
 You should already be comfortable with Rust functions, structs, `Option`, `Result`, and unit tests. You do not need experience with verification tools. This is a course about using Ply, rather than an introduction to Rust.
 
@@ -24,7 +24,7 @@ Allow about 30–45 minutes for each lesson and an hour for the challenge, plus 
 
 ## How to work through a lesson
 
-Before you run a command, write down what you expect it to tell you. Then run it, inspect the result, and explain the difference. Keep a short notebook containing your prediction, one piece of evidence, and one limit of that evidence.
+Before you run a command, write down what you expect it to tell you. Then run it, inspect the result, and explain the difference. Keep a short notebook containing your prediction, one piece of [evidence](glossary.md#earned-evidence), and one limit of that evidence.
 
 Try an exercise before opening its hint. Finish the checkpoint before reading its answers. The worked solutions explain the reasoning as well as the code, but they are most useful after you have committed to your own answer.
 

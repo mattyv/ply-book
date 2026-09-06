@@ -2,7 +2,7 @@
 
 The scheduler has room for three pending jobs. Two are already queued. Should it accept another? Yes. With three already queued, it must refuse.
 
-Your first task is to turn that boundary into a precise promise and implement it. Work in `exercises/01-first-claim/starter`.
+Your first task is to turn that boundary into a precise [promise](glossary.md#claim) and implement it. Work in `exercises/01-first-claim/starter`.
 
 ## Read the requirement before the implementation
 
@@ -10,7 +10,7 @@ The admission decision receives `active`, the number of pending jobs, and `capac
 
 “Exactly when” matters. The promise must rule out both admitting too many jobs and refusing a job that fits. A promise that merely says “never exceed capacity” could allow an implementation that rejects everything.
 
-The contract expresses that equivalence:
+The [contract](glossary.md#contract) expresses that equivalence:
 
 ```rust,ignore
 #[ply::ensures(|result| *result == (active < capacity))]
@@ -32,7 +32,7 @@ components:
         checks: [fuzz(64)]
 ```
 
-`scheduler` is the component name in the drawing. `first_claim_starter` is the Rust library name to resolve; Cargo changes the package name's hyphens to underscores. Under `fns`, `can_claim` identifies the function whose promise you want checked. `fuzz(64)` requests 64 accepted generated cases.
+`scheduler` is the [component](glossary.md#component) [name](glossary.md#name) in the drawing. `first_claim_starter` is the [Rust library name to resolve](glossary.md#anchor); Cargo changes the package name's hyphens to underscores. Under `fns`, `can_claim` identifies the function whose promise you want checked. `fuzz(64)` requests 64 accepted generated cases.
 
 The annotation states the obligation. The YAML asks Ply to gather evidence for it. Neither replaces the implementation.
 
@@ -109,7 +109,7 @@ Open `intent.svg` in a browser and find the `scheduler` box, the `can_claim` chi
 
 ## Explain the evidence
 
-A `fuzz(n)` result means the check exercised generated inputs that satisfied any preconditions and found no broken postcondition among those accepted cases. It does not mean every possible pair of `u32` values was examined.
+A `fuzz(n)` result means the check exercised generated inputs that satisfied any preconditions and found no broken [postcondition](glossary.md#postcondition) among those accepted cases. It does not mean every possible pair of `u32` values was examined.
 
 For this tiny function, you can also inspect the comparison and explain why it matches the requirement. Keep that reasoning separate from what the tool ran.
 

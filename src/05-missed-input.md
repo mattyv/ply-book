@@ -16,7 +16,7 @@ The earlier implementation capped the index before calculating the delay. The ne
 
 On paper, both expressions describe capped exponential growth. Rust evaluates them with fixed-width integers. Each intermediate operation must be valid before `.min(800)` can run.
 
-Open `src/lib.rs`. Read the existing test's inputs and the postcondition above `retry_delay_ms`. The tests cover indices zero through three; the promise covers every `u8` value. There is no `requires` clause excluding larger indices.
+Open `src/lib.rs`. Read the existing test's inputs and the [postcondition](glossary.md#postcondition) above `retry_delay_ms`. The tests cover indices zero through three; the promise covers every `u8` value. There is no `requires` clause excluding larger indices.
 
 ## Predict, then run
 
@@ -50,7 +50,7 @@ Read the finding before changing the code. In the reference run against the cour
 
 There are two arithmetic hazards. Multiplication by 100 can overflow a `u64` even when the shift itself fits. At index 64, the shift also exceeds the width of that integer. Neither hazard is reached by the four small examples.
 
-The starter's ordinary tests were green because their inputs missed the defect. Ply's generated-input check explores beyond those examples. It is still a finite run, rather than proof that every possible bug has been found.
+The starter's ordinary tests were green because their inputs missed the defect. Ply's [generated-input check](glossary.md#fuzz) explores beyond those examples. It is still a finite run, rather than proof that every possible bug has been found.
 
 This lesson and lesson 3 expose different gaps:
 
@@ -69,7 +69,7 @@ Now run the ordinary tests again, before repairing anything:
 cargo test
 ```
 
-They should now fail. The original examples still pass; the generated regression reaches the missed case. Ply has turned its discovery into a test that Cargo can run without a verification engine.
+They should now fail. The original examples still pass; the generated [regression](glossary.md#regression-test) reaches the missed case. Ply has turned its discovery into a test that Cargo can run without a verification engine.
 
 If your run did not generate that file, inspect the diagnostic before continuing. Do not substitute an unrelated compiler error for the expected arithmetic failure.
 

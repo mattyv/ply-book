@@ -17,7 +17,7 @@ after:  1  2  3  3
 
 The last case makes the decision well-defined at the cap. The scheduler should not execute an exhausted job, but the counter still must not wrap around if called there.
 
-Read the `requires` and `ensures` annotations in the starter. A precondition states the inputs under which the promise applies. Ply's generated-input check discards draws outside that condition; a passing result says nothing about those excluded calls.
+Read the `requires` and `ensures` annotations in the starter. A [precondition](glossary.md#precondition) states the inputs under which the promise applies. Ply's generated-input check discards draws outside that condition; a passing result says nothing about those excluded calls.
 
 The application validates its attempt limit when creating a scheduler. That boundary and the function's precondition are different things: an attribute is not a runtime guard for ordinary Rust callers.
 
@@ -39,13 +39,13 @@ Repeat verification with `cargo ply verify . --svg failed.svg`, then open the SV
 
 ## Use the counterexample
 
-Read the reported input and the promise that broke. Check the arithmetic by hand. If Ply writes `src/ply_generated_cex.rs`, open it, then run:
+Read the reported [counterexample](glossary.md#counterexample) and the promise that broke. Check the arithmetic by hand. If Ply writes `src/ply_generated_cex.rs`, open it, then run:
 
 ```sh
 cargo test
 ```
 
-That generated regression test exercises a concrete input. It is useful after the repair because it prevents the same behavior from slipping back unnoticed. It is not a replacement for the wider contract.
+That generated [regression test](glossary.md#regression-test) exercises a concrete input. It is useful after the repair because it prevents the same behavior from slipping back unnoticed. It is not a replacement for the wider contract.
 
 Repair the counter. Preserve the required transition and the precondition, then run:
 
@@ -68,7 +68,7 @@ Use the standard integer operations to increase the count safely and cap it. Che
 
 ## Distinguish three outcomes
 
-A counterexample means a checked input broke a promise. A compiler error means the check could not run successfully. A missing engine or unsupported input means the requested evidence was not earned. These need different repairs.
+A counterexample means a checked input broke a promise. A compiler error means the check could not run successfully. A missing engine or [unsupported](glossary.md#unsupported) input means the requested evidence was not earned. These need different repairs.
 
 The exit status is a useful gate, but the explanation tells you what happened. Do not count any nonzero exit as a successful reproduction of this exercise's bug.
 

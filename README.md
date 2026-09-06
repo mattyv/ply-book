@@ -1,8 +1,8 @@
 # The Ply Book
 
-Learn Ply by building a job scheduler in Rust. Four guided lessons and an independent challenge cover writing contracts, repairing failures, and recognizing the limits of passing evidence.
+Learn Ply by building a job scheduler in Rust. Four guided lessons and an independent challenge cover writing [contracts](src/glossary.md#contract), repairing failures, and recognizing the limits of passing [evidence](src/glossary.md#earned-evidence).
 
-[Read the book](https://mattyv.github.io/ply-book/) · [Start locally](src/setup.md)
+[Read the book](https://mattyv.github.io/ply-book/) · [Start locally](src/setup.md) · [Glossary](src/glossary.md)
 
 The exercises share a working in-memory scheduler with a bounded queue, delayed retries, and cancellation. Each lesson has a starter and a worked solution. Short checkpoints ask you to explain the result as well as repair the code.
 

@@ -2,7 +2,7 @@
 
 The scheduler now counts attempts correctly. Its next requirement is to wait longer between retries: 100 milliseconds, then 200, then 400.
 
-Work in `exercises/03-evidence-limits/starter`. This time the starter contains a promise its implementation can keep. Your job is to decide whether that promise captures the requirement.
+Work in `exercises/03-evidence-limits/starter`. This time the starter contains a [promise](glossary.md#claim) its implementation can keep. Your job is to decide whether that promise captures the requirement.
 
 ## Inspect the promise
 
@@ -53,7 +53,7 @@ Checked again rather than carried forward from an earlier run, because what each
   scheduler::retry_delay_ms — the function's own source, its contract and the checks that ran changed since that result was recorded
 ```
 
-Ply records each function's verified result and reuses it on a later run when nothing that result depends on has changed. Here you changed the contract, so Ply re-checked rather than reusing the earlier passing result, and says so. This record lives in `ply.lock`, next to `Cargo.lock`, along with scratch files Ply generates under `target/ply/`. `.gitignore` already excludes both; there is nothing to check into git.
+Ply records each function's verified result and [reuses it](glossary.md#reused-result) on a later run when nothing that result depends on has changed. Here you changed the contract, so Ply re-checked rather than reusing the earlier passing result, and says so. This record lives in `ply.lock`, next to `Cargo.lock`, along with scratch files Ply generates under `target/ply/`. `.gitignore` already excludes both; there is nothing to check into git.
 
 Then repair the implementation and run:
 
