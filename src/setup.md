@@ -50,7 +50,7 @@ Ply's contract attributes do not add runtime assertions to an ordinary Rust buil
 
 ## Keep the failure evidence
 
-Verification can create `src/ply_generated_cex.rs` and connect it to the crate's tests. Connecting it means an appended line, `mod ply_generated_cex;`, at the end of `src/lib.rs`; expect to see that line and the new file together in `git status`. The first `verify` in a fresh checkout can also update `Cargo.lock` to add the generated harness's own dependencies. Neither change means your source was touched.
+Verification can create `src/ply_generated_cex.rs` and connect it to the crate's tests. Connecting it means an appended line, `mod ply_generated_cex;`, at the end of `src/lib.rs`; expect to see that line and the new file together in `git status`. The first `verify` in a fresh checkout can also update `Cargo.lock` to add the generated harness's own dependencies. Neither change alters the code you wrote.
 
 Read `src/ply_generated_cex.rs` when it appears. It records a concrete failure that you can reproduce while repairing the code. Do not delete it merely to make `cargo test` pass.
 
