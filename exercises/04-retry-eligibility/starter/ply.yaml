@@ -3,5 +3,8 @@ components:
   scheduler:
     anchor: retry_eligibility_starter
     fns:
+      # An empty list requests no checks yet. Deleting this line entirely
+      # would run Ply's default check instead of nothing -- write the
+      # `checks:` you want once your postcondition is in place.
       is_retry_eligible:
-        checks: [fuzz(64)]
+        checks: []
