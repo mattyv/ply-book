@@ -1,4 +1,4 @@
-# 4. Independent challenge: cancellation and retries
+# 5. Independent challenge: cancellation and retries
 
 You have inherited the scheduler with admission, failure accounting, and backoff repaired. Finish its retry eligibility decision without copying the worked solution.
 

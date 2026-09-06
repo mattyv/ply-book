@@ -1,0 +1,13 @@
+[package]
+name = "missed-input-solution"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+ply = { package = "ply-attrs", git = "https://github.com/mattyv/ply", rev = "0ae6f7d37b6a385e7b1283a0d43e0d1c2cb586d9" }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ["cfg(kani)"] }

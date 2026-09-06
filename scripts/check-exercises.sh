@@ -84,3 +84,42 @@ CONTRACT
   esac
   verify_json "$dir/solution" "$target" 'fuzzed(64)' yes
 done
+
+# Ordinary tests miss the arithmetic panic; verification supplies its witness.
+dir=$(copy "05-missed-input")
+run "$dir/starter" cargo test
+run "$dir/starter" cargo run --quiet
+run "$dir/starter" "$ply_bin" check .
+verify_json "$dir/starter" retry_delay_ms violation no
+python3 - "$tmp/out" "$dir/starter" <<'PANIC'
+import json, sys
+from pathlib import Path
+result = json.loads(Path(sys.argv[1]).read_text())
+diagnostics = [d for d in result["diagnostics"] if d.get("node_id") == "scheduler::retry_delay_ms"]
+assert len(diagnostics) == 1, diagnostics
+diagnostic = diagnostics[0]
+assert diagnostic["code"] == "P0502", diagnostic
+assert diagnostic["engine"] == "proptest" and diagnostic["check"] == "fuzz(64)", diagnostic
+assert "panicked before its postcondition" in diagnostic["title"], diagnostic
+witness = diagnostic["counterexample"]
+assert 58 <= int(witness["inputs"]["attempt"]) <= 255, witness
+assert witness["cargo_test"] == "src/ply_generated_cex.rs", witness
+assert (Path(sys.argv[2]) / witness["cargo_test"]).is_file(), witness
+PANIC
+expect_test_fail run "$dir/starter" cargo test
+expect_test_fail run "$dir/starter" cargo test ply_cex_retry_delay_ms_01
+python3 - "$dir/starter/src/lib.rs" <<'REPAIR'
+from pathlib import Path
+import sys
+path = Path(sys.argv[1])
+source = path.read_text()
+body = "(100 * (1u64 << attempt)).min(800)"
+assert source.count(body) == 1
+path.write_text(source.replace(body, "100 * (1u64 << attempt.min(3))"))
+REPAIR
+run "$dir/starter" cargo test
+verify_json "$dir/starter" retry_delay_ms 'fuzzed(64)' yes
+run "$dir/solution" cargo test
+run "$dir/solution" cargo run --quiet
+run "$dir/solution" "$ply_bin" check .
+verify_json "$dir/solution" retry_delay_ms 'fuzzed(64)' yes

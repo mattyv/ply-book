@@ -17,7 +17,8 @@ The command-line demo uses those policies to run jobs. Ordinary Rust tests check
 | 1. First claim | Implement the queue admission rule | How a requirement becomes a contract |
 | 2. First failure | Repair the attempt counter | How a counterexample guides a repair |
 | 3. Passing result | Expose and strengthen a weak delay promise | Why passing evidence can support the wrong requirement |
-| 4. Independent challenge | Complete the retry eligibility rule | How to choose claims and defend their scope |
+| 4. Missed input | Investigate passing tests and a failing generated check | How checking a property finds cases the examples miss |
+| 5. Independent challenge | Complete the retry eligibility rule | How to choose claims and defend their scope |
 
 Allow about 30–45 minutes for each lesson and an hour for the challenge, plus installation time. These are planning estimates, not time limits.
 
@@ -27,7 +28,7 @@ Before you run a command, write down what you expect it to tell you. Then run it
 
 Try an exercise before opening its hint. Finish the checkpoint before reading its answers. The worked solutions explain the reasoning as well as the code, but they are most useful after you have committed to your own answer.
 
-A chapter is complete when you can explain the result. Some starter exercises are supposed to fail. One is supposed to pass while its behavior is wrong.
+A chapter is complete when you can explain the result. Some starter exercises are supposed to fail. Lesson 3 begins with a passing check of a weak promise; lesson 4 begins with passing tests that miss a broken promise.
 
 ## The version matters
 

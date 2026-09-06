@@ -32,7 +32,15 @@ With a budget of one, the first failure produces a count of one. Eligibility the
 
 The exercise's important result is the sequence: the original weak claim passes, the exact claim exposes the unchanged implementation, and the repaired code passes the exact claim. More generated cases cannot compensate for a promise that accepts the defect.
 
-## 4. Eligibility
+## 4. Missed input
+
+Cap the index before evaluating the exponential: `100 * (1u64 << attempt.min(3))`. Moving `.min(800)` to the end is unsafe because the shift and multiplication run first. The small examples do not reach either arithmetic hazard.
+
+Keep a regression test for a larger index. In particular, index 64 must return 800, as must `u8::MAX`. These inputs are within the function's promised domain even though the current scheduler never produces them.
+
+The lesson's initial green tests and failing generated check are both honest results. They covered different inputs. Once a regression test records the discovered case, ordinary Cargo tests can catch that defect too.
+
+## 5. Eligibility
 
 Both conditions must hold: `!cancelled && attempts < max_attempts`.
 
