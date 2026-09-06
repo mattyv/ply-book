@@ -15,7 +15,7 @@ rustup toolchain install 1.98.0 --profile minimal
 The repository's `rust-toolchain.toml` selects Rust 1.98.0. Install the course's exact Ply command:
 
 ```sh
-cargo install --git https://github.com/mattyv/ply   --rev c6b9e29892f27bb8398f5d99ad2cb0f588b3e4b5   --locked ply-cli
+cargo install --git https://github.com/mattyv/ply   --rev 0ae6f7d37b6a385e7b1283a0d43e0d1c2cb586d9   --locked ply-cli
 cargo ply --help
 ```
 
@@ -46,7 +46,7 @@ Each lesson has `starter` and `solution` packages. Work in the starter. Later ch
 
 Ply's contract attributes do not add runtime assertions to an ordinary Rust build. A passing `cargo test` therefore does not, by itself, say that those contracts were checked. After a verification failure, Ply can also generate an ordinary regression test from the counterexample; that test does run under Cargo.
 
-`cargo ply --help` and `cargo ply explain` cite section marks such as `§6`, `§8`, and `The-Ply-Spec.md §5.4c`. Those refer to sections of Ply's own specification, not this book. See [`The-Ply-Spec.md`](https://github.com/mattyv/ply/blob/c6b9e29892f27bb8398f5d99ad2cb0f588b3e4b5/The-Ply-Spec.md) at the pinned revision if you want that reasoning in full.
+`cargo ply --help` and `cargo ply explain` cite section marks such as `§6`, `§8`, and `The-Ply-Spec.md §5.4c`. Those refer to sections of Ply's own specification, not this book. See [`The-Ply-Spec.md`](https://github.com/mattyv/ply/blob/0ae6f7d37b6a385e7b1283a0d43e0d1c2cb586d9/The-Ply-Spec.md) at the pinned revision if you want that reasoning in full.
 
 ## Keep the failure evidence
 
