@@ -29,6 +29,9 @@ jobs:
       - name: Check exercises
         run: scripts/check-exercises.sh
 
+      - name: Check visual walkthrough
+        run: scripts/check-visuals.sh
+
       - name: Build book
         run: mdbook build
 

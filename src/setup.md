@@ -46,13 +46,15 @@ The starter is deliberately incomplete. `cargo test` fails outright: all five te
 
 Each lesson has `starter` and `solution` packages. Work in the starter. Later chapters begin with earlier decisions already repaired, so you can resume without copying files between chapters. A starter also contains working bodies for functions that belong to later lessons, so the shared scheduler still runs end to end; those functions carry no `requires` or `ensures` yet, so you will not see a later lesson's promise before you reach it. The shared scheduler source lives in `exercises/scheduler/src/`.
 
-## Learn the three commands
+## Learn the commands
 
 | Command | What it establishes |
 | --- | --- |
 | `cargo test` | The ordinary Rust tests that ran passed or failed |
 | `cargo ply check .` | The declaration is valid and the available structural checks ran; it does not run the contract checks |
 | `cargo ply verify .` | The requested checks ran, or Ply reports why evidence could not be earned |
+| `cargo ply render . -o intent.svg` | Draws the YAML declaration without gathering evidence |
+| `cargo ply verify . --publish-view --svg run.svg` | Runs checks, saves an evidence drawing, and publishes a local snapshot for Ply Visual |
 
 Ply's contract attributes do not add runtime assertions to an ordinary Rust build. A passing `cargo test` therefore does not, by itself, say that those contracts were checked. After a verification failure, Ply can also generate an ordinary regression test from the counterexample; that test does run under Cargo.
 

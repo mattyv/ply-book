@@ -101,10 +101,11 @@ The comparison already returns a boolean. You need neither an `if` statement nor
 You can also inspect the declared structure without running checks:
 
 ```sh
+cargo ply render . -o intent.svg
 cargo ply render . --text
 ```
 
-Read the component, function, and requested check in the output. It does not print the promise itself; for the `ensures` expression, read `src/lib.rs`. This view describes the declaration; it is not another verification run.
+Open `intent.svg` in a browser and find the `scheduler` box, the `can_claim` chip, and its requested check. Hover them for explanations. Grey shading describes requested checks, not successful results. Read the same component, function, and requested check in the text output. It does not print the promise itself; for the `ensures` expression, read `src/lib.rs`. This view describes the declaration; it is not another verification run.
 
 ## Explain the evidence
 

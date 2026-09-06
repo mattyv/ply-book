@@ -36,10 +36,12 @@ cargo ply check .
 
 All three should succeed. The shared scheduler tests pass too: its attempt budget only exercises small retry indices. These results establish useful behavior, but they do not cover the function's whole input domain.
 
+For the [Read the evidence walkthrough](read-the-evidence.md), first save the declaration with `cargo ply render . -o intent.svg`. The next command captures the failing visual before you repair anything.
+
 Now request generated inputs against the existing promise:
 
 ```sh
-cargo ply verify .
+cargo ply verify . --publish-view --svg failed.svg
 ```
 
 Read the finding before changing the code. In the reference run against the course's pinned Ply revision, `retry_delay_ms` reports a violation with a shrunk input of `attempt = 58`: the multiplication overflows. Your run may report a different failing input. An installation failure or a harness that could not compile is not the intended result.
@@ -95,6 +97,8 @@ The current scheduler allows at most four attempts and never supplies the large 
 That distinction matters. A smaller input contract could be a legitimate design choice in a different project, provided every caller upholds it. In this course, the requirement explicitly covers every `u8`; adding a precondition to hide large indices would change that requirement.
 
 Ordinary tests could have caught the same problem if someone had chosen those inputs. Ply's contribution here is to search for them against a stated property, rather than require the author to anticipate each example.
+
+Before finishing, complete [Read the evidence](read-the-evidence.md): compare the saved failure with a newly published repaired run, inspect the function, and explain what its evidence leaves unchecked.
 
 ## Check your learning
 

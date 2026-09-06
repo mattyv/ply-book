@@ -33,3 +33,5 @@ A chapter is complete when you can explain the result. Some starter exercises ar
 ## The version matters
 
 Ply is in early development. This course pins its command and attributes to one revision so the exercises have a reproducible reference point. Use the installation commands in the next page; a newer Ply may behave differently.
+
+You will also read declaration and evidence drawings throughout the lessons. The [Read the evidence walkthrough](read-the-evidence.md) brings those skills together: follow a failure to its source, compare runs, and explain what a reassuring picture does not establish.

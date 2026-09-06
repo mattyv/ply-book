@@ -33,6 +33,10 @@ Write your answers, then run:
 cargo ply verify .
 ```
 
+## Locate the failure visually
+
+Repeat verification with `cargo ply verify . --svg failed.svg`, then open the SVG in a browser. Find `apply_failure` and read its tooltip alongside the terminal diagnostic. Identify the failing function before inspecting the input; a component-level colour alone does not explain the defect. After your repair, use `--svg repaired.svg` and compare the outcomes. The [visual walkthrough](read-the-evidence.md) explains how to inspect completed runs in an editor too.
+
 ## Use the counterexample
 
 Read the reported input and the promise that broke. Check the arithmetic by hand. If Ply writes `src/ply_generated_cex.rs`, open it, then run:

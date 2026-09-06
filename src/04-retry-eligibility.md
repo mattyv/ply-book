@@ -18,7 +18,8 @@ The queue removes a cancelled pending job. The decision's cancellation argument 
 2. Express the complete requirement as a postcondition in `src/lib.rs`, and request a generated-input check for it in `ply.yaml`. The starter deliberately leaves both for you to write: the function has no `#[ply::ensures]` yet, and `ply.yaml` requests `checks: []` for it, an empty list rather than `fuzz(64)`.
 3. Demonstrate that your chosen check rejects the starter defect. Preserve the finding or counterexample.
 4. Repair the implementation and run ordinary tests, Ply verification, and the demo.
-5. Write a short review: what was checked, what passed, and which application-level properties remain outside that evidence.
+5. Publish the repaired run with `cargo ply verify . --publish-view --svg challenge.svg`. Inspect the eligibility function in the drawing or viewer; identify its claim, earned evidence, and one property outside its scope.
+6. Write a short review: what was checked, what passed, and which application-level properties remain outside that evidence.
 
 Choose your own examples before reading a hint. Include at least one cancelled job with budget remaining and one uncancelled job with no budget remaining.
 
@@ -45,6 +46,7 @@ Write a response of no more than five sentences. Identify at least two new failu
 | Reproduction | A reported broken promise exposes the starter defect | Only a compiler error or unrelated failure is shown |
 | Repair | Tests and verification pass without weakening the requirement | Tests or claims were removed to obtain a pass |
 | Application | You can trace the rule through failure and cancellation | Only the boolean expression was considered |
+| Visual review | The selected function, recorded outcome, and run are identified | Colour alone is offered as evidence |
 | Evidence | The scope and remaining risks are stated | A passing predicate is presented as proof of the whole scheduler |
 
 There is no numerical score. Any “revisit” identifies the next piece of work. When every row is ready, compare your reasoning with the worked solutions.

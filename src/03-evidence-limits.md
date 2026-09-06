@@ -19,6 +19,8 @@ Now run:
 cargo ply verify .
 ```
 
+Capture this first run with `cargo ply verify . --svg weak-claim.svg`. Open the drawing and name the exact claim its earned evidence supports. A green result for “at least 100” does not support increasing delay. Keep this picture; after strengthening the contract, capture `--svg stronger-claim.svg`, then `--svg repaired.svg` after repairing the body. Explain the green → violation → green sequence using the claims, not just the colours.
+
 A passing result is expected. Ply checks the claim it was given. It cannot infer that “at least 100” was intended to mean “double each time.”
 
 Run `cargo test` too. A behavioral test based on the requirement can disagree with a passing check of a weaker promise. That is a useful finding, not an inconsistency between tools.
