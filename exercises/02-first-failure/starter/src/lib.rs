@@ -7,11 +7,11 @@ pub fn can_claim(active: u32, capacity: u32) -> bool {
 pub fn apply_failure(attempts: u8, max_attempts: u8) -> u8 {
     attempts // TODO: record this failure.
 }
-#[ply::ensures(|result| *result == 100 * (1u64 << attempt.min(3)))]
+// A later lesson writes this decision's promise.
 pub fn retry_delay_ms(attempt: u8) -> u64 {
     100 * (1u64 << attempt.min(3))
 }
-#[ply::ensures(|result| *result == (!cancelled && attempts < max_attempts))]
+// A later lesson writes this decision's promise.
 pub fn is_retry_eligible(attempts: u8, max_attempts: u8, cancelled: bool) -> bool {
     !cancelled && attempts < max_attempts
 }

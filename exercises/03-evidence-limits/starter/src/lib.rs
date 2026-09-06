@@ -12,7 +12,7 @@ pub fn retry_delay_ms(attempt: u8) -> u64 {
     let _ = attempt;
     100 // TODO: this is wrong after the first retry.
 }
-#[ply::ensures(|result| *result == (!cancelled && attempts < max_attempts))]
+// A later lesson writes this decision's promise.
 pub fn is_retry_eligible(attempts: u8, max_attempts: u8, cancelled: bool) -> bool {
     !cancelled && attempts < max_attempts
 }
