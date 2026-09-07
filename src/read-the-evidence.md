@@ -42,6 +42,10 @@ Use the labels and tooltips alongside the shapes. Colour is a cue to investigate
 | Green with [earned evidence](glossary.md#earned-evidence) | Which check succeeded, for which claim and inputs? Fuzzing remains finite. |
 | Red with a [violation](glossary.md#violation) | Which promise failed? Read the diagnostic before proposing a repair. In a structural drawing, a red barred connection can instead express a [forbidden dependency](glossary.md#deny-rule). |
 | Unknown, unsupported, or missing-evidence status | Why could the requested evidence not be earned? This is not a counterexample. |
+| A small hollow shield outline beside a function name | Which claim did a person vouch for, and what artifact did they cite? A [trusted](glossary.md#trusted) claim runs no engine and upgrades no verdict; judge the named artifact on its own merits. |
+| A numbered circle, such as `#5` | Which decision is still open on this item? An [unresolved decision](glossary.md#unresolved-decision) records a question the declaration still owes an answer. In this revision it does not weaken the checks beside it, so the strength you see is still claimed in full. |
+
+The last two marks do not appear in this course's drawings, because our declaration attests nothing by hand and leaves no decision open. They are listed so that a shield or a numbered circle in your own project is readable on sight rather than guessed at.
 
 A component's summary does not replace its children's details. In a declaration drawing, the weakest declared function sets the component's ceiling. Inspect the individual claim before treating a dark or green box as reassuring.
 

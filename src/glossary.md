@@ -164,11 +164,15 @@ A qualification accompanying an outcome, such as evidence being conditional on a
 
 ## Trusted
 
-A human-attested claim with a named supporting artifact, such as a specialised test or an audit. It runs no verification engine and does not upgrade a verdict. The artifact must be inspected on its own merits. In the pinned version, automatic re-attestation after source changes is not implemented.
+A human-attested claim with a named supporting artifact, such as a specialised test or an audit. It runs no verification engine and does not upgrade a verdict. The artifact must be inspected on its own merits. In a render it draws as a small hollow shield outline beside the function name; hover it for the claim and the artifact cited. In the pinned version, automatic re-attestation after source changes is not implemented, so the shield looks equally fresh however far the code has moved since a person last read it. See the [visual walkthrough](read-the-evidence.md#read-the-visual-language).
 
 ## Unclaimed
 
 No checking evidence has been established for the item in this context. It can occur when no check was requested. A declaration-only render also presents its items as unclaimed because rendering runs no engines—even if you verified the code separately. It does not mean a check found a bug.
+
+## Unresolved decision
+
+A question a declaration still owes an answer, recorded against a function or component with an identifying number. In a render it draws as a numbered circle, such as `#5`; hover it for the question. It is a note to readers, not a verdict: it reports no defect and no evidence. The intended behaviour is that an open decision holds the item's checks down to the weakest level, but in the pinned version that cap is not applied, so the checks beside a numbered circle still run and report at full strength.
 
 ## Unsupported
 
