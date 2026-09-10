@@ -7,7 +7,7 @@ publish = false
 [workspace]
 
 [dependencies]
-ply = { package = "ply-attrs", git = "https://github.com/mattyv/ply", rev = "66342cbe19e74ad268eeb71b25c8c271a8791e72" }
+ply = { package = "ply-attrs", git = "https://github.com/mattyv/ply", rev = "66342cb02ab876326f6ca53360e5b440c3d950d1" }
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ["cfg(kani)"] }
