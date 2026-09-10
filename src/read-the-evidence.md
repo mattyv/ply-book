@@ -39,6 +39,8 @@ Use the labels and tooltips alongside the shapes. Colour is a cue to investigate
 | Grey depth in a declaration render | How strong are the requested checks? This is a declared [ceiling](glossary.md#ceiling), not evidence already earned. |
 | Hatching; hollow or dashed component border | What has no claims? Absence of a claim is different from a failed claim. |
 | Contract mark; check label | What obligation is stated, and which checks were requested? Source annotations may only become available after verification. |
+| **Architecture · module boundaries inside crates** | Which module-anchored component boundaries are present, and did this run inspect references across them? `Declared` is not a clean architecture result; `not checked` makes that gap explicit. |
+| **Application acceptance · finite production-path examples** | Which named production-path tests ran? Each result applies only to its listed inputs and expected output. It does not strengthen a function proof. |
 | Green with [earned evidence](glossary.md#earned-evidence) | Which check succeeded, for which claim and inputs? Fuzzing remains finite. |
 | Red with a [violation](glossary.md#violation) | Which promise failed? Read the diagnostic before proposing a repair. In a structural drawing, a red barred connection can instead express a [forbidden dependency](glossary.md#deny-rule). |
 | Unknown, unsupported, or missing-evidence status | Why could the requested evidence not be earned? This is not a counterexample. |
@@ -50,6 +52,8 @@ The last two marks do not appear in this course's drawings, because our declarat
 A component's summary does not replace its children's details. In a declaration drawing, the weakest declared function sets the component's ceiling. Inspect the individual claim before treating a dark or green box as reassuring.
 
 Our lesson has one component and one declared function, so there are no dependency arrows to interpret. In larger specifications, [solid arrows](glossary.md#edge) declare allowed calls, dashed arrows declare data flows, and external boxes mark outside actors. A declared connection is not a runtime trace. Do not infer that a relationship was checked merely because it was drawn.
+
+The two whole-scope bands answer questions that a function chip cannot. The architecture band concerns references between modules in one crate. The application acceptance band concerns named examples that exercise a production path. Read each band's own state: a green function does not make either band green, and a passing acceptance example does not prove every input.
 
 ## Capture the failure
 
@@ -113,6 +117,7 @@ Answer before opening the explanations:
 5. An old view is green after you edit the function. What must happen before you cite evidence for the edited code?
 6. Where do you go from a red chip to a reproducible repair?
 7. The strip says “0 promise nothing.” Does that mean every Rust function has a claim?
+8. A function is green, the architecture band says `not checked`, and one acceptance example passed. Which conclusions are justified?
 
 <details>
 <summary>Answers and completion criteria</summary>
@@ -124,6 +129,7 @@ Answer before opening the explanations:
 5. Run verification again, publish it, and inspect the new result and its run information.
 6. Read the function's declaration and diagnostic, inspect the source and counterexample, retain the generated regression, repair the body, then run tests and verification again.
 7. No. The strip summarises the declarations in this spec. Functions omitted from it are not counted.
+8. The function earned its stated evidence, and that one finite acceptance example passed. No clean same-crate architecture result was established, and the example says nothing about untested inputs.
 
 Finish with a short review note naming the claim, its before and after outcomes, the failing input, the evidence earned after repair, and one application property this run did not establish. Keep both evidence drawings with your notes.
 

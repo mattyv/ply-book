@@ -4,6 +4,10 @@ These definitions describe the course's pinned Ply revision. A declaration can e
 
 Start with [declaration](#declaration), [claim](#claim), [contract](#contract), and [check](#check). For diagrams, see [component](#component), [edge](#edge), [ceiling](#ceiling), and [earned evidence](#earned-evidence). The [visual walkthrough](read-the-evidence.md) puts those terms to work.
 
+## Acceptance evidence
+
+The result of a named test that sends finite, representative input through a production entry point and compares the output with a separately stated expectation. It answers a different question from a function contract: a proof can pass while acceptance fails, and one passing example does not cover every external input. The visual report gives acceptance its own application-level band.
+
 ## Anchor
 
 The Rust path that connects a component declaration to actual code, for example `anchor: my_crate::queue`. It answers “where is this component implemented?” The component's YAML name answers “what do we call it in the spec?” See [lesson 1](01-first-claim.md).
@@ -60,7 +64,7 @@ An entry in the specification describing structure, a rule, or requested checkin
 
 An explicit prohibition under `deny:`. For example, `worker -> storage` in that list forbids the relationship that the same string under `edges:` would permit. Patterns can use `*` and an `except` list. An exception removes that denial for the listed component; it does not itself supply a missing permission.
 
-In the pinned version, crate-level denials are checked against Cargo's dependency graph. Item-level call denials are declarations only. A red barred arrow depicts the prohibition; its existence alone does not mean code violated it. See the [architecture reference](https://github.com/mattyv/ply/blob/0ae6f7d37b6a385e7b1283a0d43e0d1c2cb586d9/docs/SCHEMA.md#8-architecture-edges-denials-capabilities-ownership).
+In the pinned version, crate-level denials are checked against Cargo's dependency graph. Item-level call denials are declarations only. A red barred arrow depicts the prohibition; its existence alone does not mean code violated it. See the [architecture reference](https://github.com/mattyv/ply/blob/66342cb02ab876326f6ca53360e5b440c3d950d1/docs/SCHEMA.md#8-architecture-edges-denials-capabilities-ownership).
 
 ## Diagnostic
 
@@ -104,6 +108,10 @@ A generated Rust program that sets up inputs, calls code, and evaluates a claim 
 
 A property intended to remain true of state, such as a queue length never exceeding its capacity. Ply's `state.holds` declares such properties. A passing admission predicate alone does not establish a queue invariant: the state transitions also matter. Declaring an invariant is separate from establishing it at the places where the implementation can change state.
 
+## Module boundary
+
+A boundary declared by anchoring a component to a Rust module inside a crate. Its component box shows the intended ownership and permitted relationships. The separate architecture band says whether Ply actually inspected source references across those boundaries. A declaration-only drawing, or a completed run marked `not checked`, is not a clean architecture result.
+
 ## Name
 
 An identifier in a Ply declaration, such as `scheduler` under `components`. Component names use lowercase snake_case. This identifier belongs to the specification; it need not match the Rust path in the component's anchor. Names identify things; [references](#reference) use those names to point to them.
@@ -126,7 +134,7 @@ A condition that must hold on entry for the function's promise to apply, written
 
 ## Profile
 
-A named set of restrictions a component adopts, such as bans on particular source constructs. It is not Cargo's development or release build profile. Read the pinned [profile reference](https://github.com/mattyv/ply/blob/0ae6f7d37b6a385e7b1283a0d43e0d1c2cb586d9/docs/SCHEMA.md#profiles) and the command's report to distinguish declared policy from checked findings.
+A named set of restrictions a component adopts, such as bans on particular source constructs. It is not Cargo's development or release build profile. Read the pinned [profile reference](https://github.com/mattyv/ply/blob/66342cb02ab876326f6ca53360e5b440c3d950d1/docs/SCHEMA.md#profiles) and the command's report to distinguish declared policy from checked findings.
 
 ## Pure
 
