@@ -12,7 +12,7 @@ dependencies = [
 [[package]]
 name = "ply-attrs"
 version = "0.2.0"
-source = "git+https://github.com/mattyv/ply?rev=1ab348db957f4df905f3ff35f917f2e7cbee26a6#1ab348db957f4df905f3ff35f917f2e7cbee26a6"
+source = "git+https://github.com/mattyv/ply?rev=1b2705b797f3cdedde40a52a40719cbb9cc00174#1b2705b797f3cdedde40a52a40719cbb9cc00174"
 dependencies = [
  "proc-macro2",
  "quote",
