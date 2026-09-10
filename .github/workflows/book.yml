@@ -24,7 +24,7 @@ jobs:
         run: cargo install mdbook --version 0.5.4 --locked
 
       - name: Install Ply
-        run: cargo install --git https://github.com/mattyv/ply ply-cli --rev 66342cb02ab876326f6ca53360e5b440c3d950d1 --locked
+        run: cargo install --git https://github.com/mattyv/ply ply-cli --rev bb50f1dd1411e8910a29fa70ccd5b65a8830d2e0 --locked
 
       - name: Check exercises
         run: scripts/check-exercises.sh
