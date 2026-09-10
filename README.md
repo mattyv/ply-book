@@ -25,7 +25,7 @@ Use Rust 1.98.0 and the pinned Ply 0.2.0 revision shared by the exercises:
 
 ```sh
 cargo install --git https://github.com/mattyv/ply \
-  --rev 1b2705b797f3cdedde40a52a40719cbb9cc00174 --locked ply-cli
+  --rev 66342cbe19e74ad268eeb71b25c8c271a8791e72 --locked ply-cli
 cargo install mdbook --version 0.5.4 --locked
 bash scripts/check-exercises.sh
 bash scripts/check-visuals.sh

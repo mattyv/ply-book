@@ -4,7 +4,7 @@ You have practiced four different jobs: implementing a precise requirement, repa
 
 Before applying Ply to a larger project, pick one small decision in real code. Write its requirement in plain language, identify the inputs under which it must hold, and choose a [promise](glossary.md#claim) that would reject a plausible bug. Then run the available checks and record their limits.
 
-Use the [Ply reference](https://github.com/mattyv/ply/blob/1b2705b797f3cdedde40a52a40719cbb9cc00174/docs/SCHEMA.md) for declarations and the [pinned Ply README](https://github.com/mattyv/ply/blob/1b2705b797f3cdedde40a52a40719cbb9cc00174/README.md) for the wider workflow.
+Use the [Ply reference](https://github.com/mattyv/ply/blob/66342cbe19e74ad268eeb71b25c8c271a8791e72/docs/SCHEMA.md) for declarations and the [pinned Ply README](https://github.com/mattyv/ply/blob/66342cbe19e74ad268eeb71b25c8c271a8791e72/README.md) for the wider workflow.
 
 ## Possible later courses
 

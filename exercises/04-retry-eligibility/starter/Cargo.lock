@@ -5,7 +5,7 @@ version = 4
 [[package]]
 name = "ply-attrs"
 version = "0.2.0"
-source = "git+https://github.com/mattyv/ply?rev=1b2705b797f3cdedde40a52a40719cbb9cc00174#1b2705b797f3cdedde40a52a40719cbb9cc00174"
+source = "git+https://github.com/mattyv/ply?rev=66342cbe19e74ad268eeb71b25c8c271a8791e72#66342cbe19e74ad268eeb71b25c8c271a8791e72"
 dependencies = [
  "proc-macro2",
  "quote",
