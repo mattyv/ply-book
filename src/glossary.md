@@ -64,7 +64,7 @@ An entry in the specification describing structure, a rule, or requested checkin
 
 An explicit prohibition under `deny:`. For example, `worker -> storage` in that list forbids the relationship that the same string under `edges:` would permit. Patterns can use `*` and an `except` list. An exception removes that denial for the listed component; it does not itself supply a missing permission.
 
-In the pinned version, crate-level denials are checked against Cargo's dependency graph. Item-level call denials are declarations only. A red barred arrow depicts the prohibition; its existence alone does not mean code violated it. See the [architecture reference](https://github.com/mattyv/ply/blob/66342cb02ab876326f6ca53360e5b440c3d950d1/docs/SCHEMA.md#8-architecture-edges-denials-capabilities-ownership).
+In the pinned version, crate-level denials are checked against Cargo's dependency graph. Item-level call denials are declarations only. A red barred arrow depicts the prohibition; its existence alone does not mean code violated it. See the [architecture reference](https://github.com/mattyv/ply/blob/bb50f1dd1411e8910a29fa70ccd5b65a8830d2e0/docs/SCHEMA.md#8-architecture-edges-denials-capabilities-ownership).
 
 ## Diagnostic
 
@@ -134,7 +134,7 @@ A condition that must hold on entry for the function's promise to apply, written
 
 ## Profile
 
-A named set of restrictions a component adopts, such as bans on particular source constructs. It is not Cargo's development or release build profile. Read the pinned [profile reference](https://github.com/mattyv/ply/blob/66342cb02ab876326f6ca53360e5b440c3d950d1/docs/SCHEMA.md#profiles) and the command's report to distinguish declared policy from checked findings.
+A named set of restrictions a component adopts, such as bans on particular source constructs. It is not Cargo's development or release build profile. Read the pinned [profile reference](https://github.com/mattyv/ply/blob/bb50f1dd1411e8910a29fa70ccd5b65a8830d2e0/docs/SCHEMA.md#profiles) and the command's report to distinguish declared policy from checked findings.
 
 ## Pure
 
