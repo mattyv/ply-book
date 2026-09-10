@@ -12,10 +12,12 @@ cd ply-book
 rustup toolchain install 1.98.0 --profile minimal
 ```
 
-The repository's `rust-toolchain.toml` selects Rust 1.98.0. Install the course's exact Ply command:
+The repository's `rust-toolchain.toml` selects Rust 1.98.0. Install the course's pinned Ply 0.2.0 command:
 
 ```sh
-cargo install --git https://github.com/mattyv/ply   --rev 0ae6f7d37b6a385e7b1283a0d43e0d1c2cb586d9   --locked ply-cli
+cargo install --git https://github.com/mattyv/ply \
+  --rev 1ab348db957f4df905f3ff35f917f2e7cbee26a6 --locked ply-cli
+cargo ply --version
 cargo ply --help
 ```
 
@@ -27,7 +29,7 @@ warning: default toolchain implicitly overridden with `1.98.0-x86_64-unknown-lin
   = note: rustup selects the toolchain based on the parent environment and not the environment of the package being installed
 ```
 
-This is expected: `rust-toolchain.toml` is in effect, so Ply is built with the course's pinned toolchain rather than your default one. It is not a problem.
+This warning confirms that Rust builds Ply with the course's pinned toolchain.
 
 If Cargo reports another `ply-cli` installation, decide whether to replace it, then repeat the installation with `--force`. The exercise manifests already pin the matching attribute dependency. Keep both pins together when upgrading the course.
 
@@ -58,7 +60,7 @@ Each lesson has `starter` and `solution` packages. Work in the starter. Later ch
 
 Ply's [contract](glossary.md#contract) attributes do not add runtime assertions to an ordinary Rust build. A passing `cargo test` therefore does not, by itself, say that those contracts were checked. After a verification failure, Ply can also generate an ordinary [regression test](glossary.md#regression-test) from the counterexample; that test does run under Cargo.
 
-`cargo ply --help` and `cargo ply explain` cite section marks such as `§6`, `§8`, and `The-Ply-Spec.md §5.4c`. Those refer to sections of Ply's own specification, not this book. See [`The-Ply-Spec.md`](https://github.com/mattyv/ply/blob/0ae6f7d37b6a385e7b1283a0d43e0d1c2cb586d9/The-Ply-Spec.md) at the pinned revision if you want that reasoning in full.
+`cargo ply --help` and `cargo ply explain` cite section marks such as `§6`, `§8`, and `The-Ply-Spec.md §5.4c`. Those refer to sections of Ply's own specification, not this book. See [`The-Ply-Spec.md`](https://github.com/mattyv/ply/blob/1ab348db957f4df905f3ff35f917f2e7cbee26a6/The-Ply-Spec.md) at the pinned revision if you want that reasoning in full.
 
 ## Keep the failure evidence
 
